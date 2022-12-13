@@ -1,5 +1,6 @@
 import React from "react";
-import {Box, createTheme, Grid, Paper, styled, TableContainer, ThemeProvider} from "@mui/material";
+import {Box, createTheme, Grid, Paper, styled, TableContainer, ThemeProvider, Button} from "@mui/material";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const allTasks = [
     {id: 'one', value: 'first'},
@@ -40,7 +41,7 @@ export const TaskList = () => {
                     }
                 }}
             >
-                <Grid container spacing={2} >
+                <Grid container spacing={2}>
                     {[lightTheme].map((theme, index) => (
                         <Grid item xs={6} key={index}>
                             <ThemeProvider theme={theme}>
@@ -54,7 +55,18 @@ export const TaskList = () => {
                                 >
                                     {tasks.map((task) => (
                                         <Item key={task.id}>
-                                            {task.value}
+                                            <div style={subjectStyle}>
+                                                <label style={{marginLeft: "-60%", color: "black"}}>title</label>
+                                            </div>
+                                            <div style={{marginTop: "-18%", marginLeft: "-61%"}}>
+                                                {task.value}
+                                            </div>
+                                            <div style={statusStyle}>
+                                                <label style={{marginTop: "-36%"}}>Todo</label>
+                                            </div>
+                                            <div style={{marginTop:"-28%", marginLeft:"65%"}}>
+                                                <BorderColorIcon/>
+                                            </div>
                                         </Item>
                                     ))}
                                 </Box>
@@ -102,7 +114,7 @@ const listStyle = {
     color: "white",
     backgroundColor: "rgb(162,206,237)",
     padding: "11px",
-    paddingLeft: "18px",
+    paddingLeft: "17px",
     marginLeft: "37%",
     marginRight: "37%",
     fontFamily: "Arial",
@@ -121,6 +133,32 @@ const noWorkStyle = {
     color: "black",
     paddingTop: "35%",
 }
+
+const subjectStyle = {
+    fontFamily: "Arial",
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "center",
+    fontStyle: "bold",
+    fontSize: "larger",
+    marginRight: "17%",
+    fontWeight: 700,
+}
+
+const statusStyle = {
+    color: "white",
+    backgroundColor: "rgb(23,117,185)",
+    padding: "11px",
+    // paddingLeft: "45px",
+    marginLeft: "8%",
+    marginRight: "36%",
+    marginTop: "2px",
+    display: "flex",
+    flexDirection: "column",
+    height: "13px",
+    fontSize: 15,
+    borderRadius: "5px 5px 5px 5px",
+};
 
 // const scrollStyle = {
 //     overflowY: "scroll",
