@@ -22,7 +22,8 @@ export const EditTask = () => {
         //API call
     }
 
-    return (<div>
+    return (
+        <div>
             <form onSubmit={submitHandler}>
                 <div>
                     <label style={titleStyle}>

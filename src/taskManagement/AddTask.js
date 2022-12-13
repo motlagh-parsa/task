@@ -1,11 +1,55 @@
 import React from "react";
 import './myStyle.css';
 import {Button, FormControl, InputLabel, Stack, TextField} from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
+import {TaskList} from "./TaskList";
 
-
-
-
+export const AddTask = () => {
+    return (
+        <div>
+            <form>
+                <div>
+                    <label style={titleStyle}>
+                        Task Management > Home
+                    </label>
+                </div>
+                <div>
+                    <br/>
+                    <label style={subjectStyle}>
+                        Add a new Task
+                    </label>
+                </div>
+                <div>
+                    <br/>
+                    <TextField id="filled-basic" label="Title" variant="filled"
+                               size="small"
+                               style={{width: "23%", paddingBottom: "0.7%"}}
+                        // onChange={titleChange}
+                    />
+                </div>
+                <div>
+                    <TextField
+                        id="filled-multiline-static"
+                        multiline
+                        rows={5}
+                        label="Description"
+                        variant="filled"
+                        style={{width: "23%"}}
+                        // onChange={descriptionChange}
+                    />
+                </div>
+                <Stack direction="row" style={{paddingTop: "0.6%"}}>
+                    <Button variant="contained" startIcon={<AddIcon/>} fullWidth
+                            style={{marginLeft: "38.5%", marginRight: "38.5%", height: "48px", textTransform: 'none'}}>
+                        Add
+                    </Button>
+                </Stack>
+            </form>
+            <br />
+            <TaskList />
+        </div>
+    )
+}
 
 
 const titleStyle = {
@@ -22,7 +66,7 @@ const titleStyle = {
     textAlign: "left",
     height: "21px",
     fontWeight: 500,
-    fontSize: 18
+    fontSize: 18,
 };
 
 const subjectStyle = {
@@ -32,6 +76,6 @@ const subjectStyle = {
     textAlign: "center",
     fontStyle: "bold",
     fontSize: "larger",
-    marginRight: "17%",
+    marginRight: "12%",
     fontWeight: 700,
 }
