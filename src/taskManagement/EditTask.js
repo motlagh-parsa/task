@@ -4,16 +4,17 @@ import {Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField} fro
 import EditIcon from '@mui/icons-material/Edit';
 
 
-export const EditTask = () => {
+export const EditTask = (props) => {
+
     const [title, setTitle] = React.useState('')
-    const [description, setDescription] = React.useState('')
+    const [desc, setDesc] = React.useState('')
     const [status, setStatus] = React.useState('')
 
     const titleChange = (event) => {
         setTitle(event.target.value)
     }
     const descriptionChange = (event) => {
-        setDescription(event.target.value)
+        setDesc(event.target.value)
     }
     const statusChange = (event) => {
         setStatus(event.target.value)
@@ -40,7 +41,7 @@ export const EditTask = () => {
                     <br/>
                     <TextField id="filled-basic" label="Title" variant="filled" placeholder="Title of the task"
                                size="small"
-                               style={{width: "23%", paddingBottom: "1%"}}
+                               style={{width: "23%", paddingBottom: "1%", marginLeft: "38.5%"}}
                                onChange={titleChange}/>
                 </div>
                 <div>
@@ -50,12 +51,12 @@ export const EditTask = () => {
                         rows={17}
                         placeholder="Description of task goes here."
                         variant="filled"
-                        style={{width: "23%"}}
+                        style={{width: "23%", marginLeft: "38.5%"}}
                         onChange={descriptionChange}
                     />
                 </div>
                 <div>
-                    <FormControl variant="filled" style={{width: "23%"}} sx={{m: 1, minWidth: 120, paddingTop: "0.3%"}}>
+                    <FormControl variant="filled" style={{width: "23%", marginLeft: "38.5%"}} sx={{m: 1, minWidth: 120, paddingTop: "0.3%"}}>
                         <InputLabel id="demo-simple-select-filled-label"></InputLabel>
                         <Select defaultValue={10} style={{textAlign: "left"}}
                                 labelId="demo-simple-select-filled-label"

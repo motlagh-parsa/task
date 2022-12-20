@@ -1,13 +1,8 @@
 import React from "react";
 import {Box, createTheme, Grid, Paper, styled, TableContainer, ThemeProvider, Button} from "@mui/material";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-
-const allTasks = [
-    {id: 'one', value: 'first'},
-    {id: 'two', value: 'second'},
-    {id: 'three', value: 'third'},
-    {id: 'four', value: 'fourth'},
-]
+import {Link, Link as RouterLink} from "react-router-dom";
+import {EditTask} from "./EditTask";
 
 const Item = styled(Paper)(({theme}) => ({
     ...theme.typography.body2,
@@ -19,12 +14,22 @@ const Item = styled(Paper)(({theme}) => ({
     lineHeight: '60px',
 }));
 
-export const TaskList = () => {
+export const TaskList = (props) => {
+    const {tasks} = props;
+    const handleEdit = () => {
+
+    }
     const lightTheme = createTheme({palette: {mode: 'light'}});
-    const [tasks, setTasks] = React.useState(allTasks)
+    // const [tasks, setTasks] = React.useState(allTasks)
+    // const handleAdd = () => {
+    //     // alert()
+    //     const tasksClone = [...tasks]
+    //     tasksClone.push(props.title)
+    //     setTasks(tasksClone)
+    // }
     const Elevation = () => {
         if (tasks.length === 0)
-            return <div style={noWorkStyle}>You have nothing to do.<br/>Go grt some sleep.</div>
+            return <div style={noWorkStyle}>You have nothing to do.<br/>Go get some sleep.</div>
 
         return (
             <TableContainer
@@ -54,20 +59,30 @@ export const TaskList = () => {
                                     }}
                                 >
                                     {tasks.map((task) => (
-                                        <Item key={task.id}>
-                                            <div style={subjectStyle}>
-                                                <label style={{marginLeft: "-60%", color: "black"}}>title</label>
-                                            </div>
-                                            <div style={{marginTop: "-18%", marginLeft: "-61%"}}>
-                                                {task.value}
-                                            </div>
-                                            <div style={statusStyle}>
-                                                <label style={{marginTop: "-36%"}}>Todo</label>
-                                            </div>
-                                            <div style={{marginTop:"-28%", marginLeft:"65%"}}>
-                                                <BorderColorIcon/>
-                                            </div>
-                                        </Item>
+                                        <div key={task.title}>
+                                            <Item>
+                                                <div style={subjectStyle}>
+                                                    <label style={{
+                                                        // marginLeft: "-60%",
+                                                        marginRight: "60%",
+                                                        wordWrap: "break-word",
+                                                        color: "black"
+                                                    }}>
+                                                        {task.title}
+                                                    </label>
+                                                </div>
+                                                <div style={{marginTop: "-18%", marginLeft: "-61%"}}>
+                                                    {task.desc}
+                                                </div>
+                                                <div style={statusStyle}>
+                                                    <label style={{marginTop: "-36%"}}>Todo</label>
+                                                </div>
+                                                <div style={{marginTop: "-28%", marginLeft: "65%"}}>
+
+                                                  <Link to={`edit/${task.title}/${task.desc}`}><BorderColorIcon /></Link>
+                                                </div>
+                                            </Item>
+                                        </div>
                                     ))}
                                 </Box>
                             </ThemeProvider>
@@ -141,7 +156,7 @@ const subjectStyle = {
     textAlign: "center",
     fontStyle: "bold",
     fontSize: "larger",
-    marginRight: "17%",
+    // marginRight: "17%",
     fontWeight: 700,
 }
 

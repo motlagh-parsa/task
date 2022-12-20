@@ -4,7 +4,15 @@ import {Button, FormControl, InputLabel, Stack, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {TaskList} from "./TaskList";
 
-export const AddTask = () => {
+export const AddTask = (props) => {
+    const [title, setTitle] = React.useState('')
+    const [desc, setDesc] = React.useState('')
+    const titleChange = (event) => {
+        setTitle(event.target.value)
+    }
+    const descChange = (event) => {
+        setDesc(event.target.value)
+    }
     return (
         <div>
             <form>
@@ -23,8 +31,8 @@ export const AddTask = () => {
                     <br/>
                     <TextField id="filled-basic" label="Title" variant="filled"
                                size="small"
-                               style={{width: "23%", paddingBottom: "0.7%"}}
-                        // onChange={titleChange}
+                               style={{width: "23%", paddingBottom: "0.7%", marginLeft: "38.5%"}}
+                               onChange={titleChange}
                     />
                 </div>
                 <div>
@@ -34,19 +42,20 @@ export const AddTask = () => {
                         rows={5}
                         label="Description"
                         variant="filled"
-                        style={{width: "23%"}}
-                        // onChange={descriptionChange}
+                        style={{width: "23%", marginLeft: "38.5%"}}
+                        onChange={descChange}
                     />
                 </div>
                 <Stack direction="row" style={{paddingTop: "0.6%"}}>
                     <Button variant="contained" startIcon={<AddIcon/>} fullWidth
-                            style={{marginLeft: "38.5%", marginRight: "38.5%", height: "48px", textTransform: 'none'}}>
+                            style={{marginLeft: "38.5%", marginRight: "38.5%", height: "48px", textTransform: 'none'}}
+                            onClick={() => props.onAdd(title, desc)}>
                         Add
                     </Button>
                 </Stack>
             </form>
-            <br />
-            <TaskList />
+            <br/>
+            {/*<TaskList title={title}/>*/}
         </div>
     )
 }
