@@ -2,23 +2,41 @@ import './App.css';
 import {EditTask} from "./taskManagement/EditTask";
 import {AddTask} from "./taskManagement/AddTask";
 import {TaskList} from "./taskManagement/TaskList";
-import React from "react";
-import {createBrowserRouter, createRoutesFromElements, Outlet, Route} from "react-router-dom";
+import React, {createContext} from "react";
+import {Route, Routes} from "react-router-dom";
 import {Home} from "./Home";
 
-// const allTasks = [
-//     {title: 'one', desc: 'first'},
-//     {title: 'two', desc: 'second'},
-//     {title: 'three', desc: 'third'},
-//     {title: 'four', desc: 'fourth'},
-// ]
+
+export const TaskContext = createContext()
 
 function App() {
+    const allTasks = [
+        {title: 'one', desc: 'first'},
+        {title: 'two', desc: 'second'},
+        {title: 'three', desc: 'third'},
+        {title: 'four', desc: 'fourth'},
+    ]
+
+    const [tasks, setTasks] = React.useState(allTasks);
+
+    const handleAdd = (title, desc) => {
+        const tasksExtra = [{title: title, desc: desc}]
+        const taskClone = tasks.concat(tasksExtra)
+        setTasks(taskClone)
+    }
+
+    const handleEdit = (title, desc) => {
+
+    }
+
     return (
-    <div className="App">
-      <Outlet/>
-    </div>
-  );
+        <TaskContext.Provider value={tasks}>
+            <Routes>
+                <Route index element={<Home onAdd={handleAdd}/>}/>,
+                <Route path="/edit/:id" element={<EditTask onEdit={handleEdit}/>}/>
+            </Routes>
+        </TaskContext.Provider>
+    );
 }
 
 export default App;

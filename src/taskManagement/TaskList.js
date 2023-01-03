@@ -79,7 +79,7 @@ export const TaskList = (props) => {
                                                 </div>
                                                 <div style={{marginTop: "-28%", marginLeft: "65%"}}>
 
-                                                  <Link to={`edit/${task.title}/${task.desc}`}><BorderColorIcon /></Link>
+                                                  <Link to={`edit/${task.title}`}><BorderColorIcon /></Link>
                                                 </div>
                                             </Item>
                                         </div>

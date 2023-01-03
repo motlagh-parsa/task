@@ -1,14 +1,16 @@
 import React from "react";
-import './myStyle.css';
 import {Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import {useState, createContext, useContext} from "react";
+import {TaskContext} from "../App";
 
 
 export const EditTask = (props) => {
+    const task = useContext(TaskContext)
 
-    const [title, setTitle] = React.useState('')
-    const [desc, setDesc] = React.useState('')
-    const [status, setStatus] = React.useState('')
+    const [title, setTitle] = React.useState(task.title)
+    const [desc, setDesc] = React.useState(task.desc)
+    const [status, setStatus] = React.useState(10)
 
     const titleChange = (event) => {
         setTitle(event.target.value)
@@ -25,6 +27,7 @@ export const EditTask = (props) => {
 
     return (
         <div>
+
             <form onSubmit={submitHandler}>
                 <div>
                     <label style={titleStyle}>
@@ -42,6 +45,7 @@ export const EditTask = (props) => {
                     <TextField id="filled-basic" label="Title" variant="filled" placeholder="Title of the task"
                                size="small"
                                style={{width: "23%", paddingBottom: "1%", marginLeft: "38.5%"}}
+                               value={title}
                                onChange={titleChange}/>
                 </div>
                 <div>
@@ -52,15 +56,18 @@ export const EditTask = (props) => {
                         placeholder="Description of task goes here."
                         variant="filled"
                         style={{width: "23%", marginLeft: "38.5%"}}
+                        value={desc}
                         onChange={descriptionChange}
                     />
                 </div>
                 <div>
-                    <FormControl variant="filled" style={{width: "23%", marginLeft: "38.5%"}} sx={{m: 1, minWidth: 120, paddingTop: "0.3%"}}>
+                    <FormControl variant="filled" style={{width: "23%", marginLeft: "38.5%"}}
+                                 sx={{m: 1, minWidth: 120, paddingTop: "0.3%"}}>
                         <InputLabel id="demo-simple-select-filled-label"></InputLabel>
-                        <Select defaultValue={10} style={{textAlign: "left"}}
+                        <Select style={{textAlign: "left"}}
                                 labelId="demo-simple-select-filled-label"
                                 id="demo-simple-select-filled"
+                                value={status}
                                 onChange={statusChange}
                         >
                             <MenuItem value={10}>Todo</MenuItem>
@@ -70,7 +77,7 @@ export const EditTask = (props) => {
                     </FormControl>
                 </div>
                 <Stack direction="row" spacing={1.5} style={{paddingTop: "0.3%"}}>
-                    <Button variant="contained" startIcon={<EditIcon/>} fullWidth
+                    <Button onClick={props.onEdit(title, desc)} variant="contained" startIcon={<EditIcon/>} fullWidth
                             style={{marginLeft: "38.5%", height: "48px", textTransform: 'none'}}>
                         Edit
                     </Button>

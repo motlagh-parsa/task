@@ -24,13 +24,12 @@ import {Home} from "./Home";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        {/*<RouterProvider router={router} />*/}
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home/>}/>,
-                <Route path="/edit/:id/:value" element={<EditTask/>}/>
-                {/*<Route path="/edit/:id" render={(props) => <EditTask title={Home.tasks.title} desc={Home.tasks.desc} />}/>*/}
-            </Routes>
+            <App />
+            {/*<Routes>*/}
+            {/*    <Route index element={<App/>}>*/}
+            {/*    </Route>*/}
+            {/*</Routes>*/}
         </BrowserRouter>
     </React.StrictMode>
 );

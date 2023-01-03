@@ -1,7 +1,7 @@
 import React from "react";
-import './myStyle.css';
 import {Button, FormControl, InputLabel, Stack, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+
 import {TaskList} from "./TaskList";
 
 export const AddTask = (props) => {
