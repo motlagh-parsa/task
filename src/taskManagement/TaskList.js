@@ -1,8 +1,8 @@
-import React from "react";
+import React, {createContext, useContext} from "react";
 import {Box, createTheme, Grid, Paper, styled, TableContainer, ThemeProvider, Button} from "@mui/material";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {Link, Link as RouterLink} from "react-router-dom";
-import {EditTask} from "./EditTask";
+import {TaskContext} from "../App";
 
 const Item = styled(Paper)(({theme}) => ({
     ...theme.typography.body2,
@@ -14,19 +14,16 @@ const Item = styled(Paper)(({theme}) => ({
     lineHeight: '60px',
 }));
 
+export const SelectedTask = createContext()
+
 export const TaskList = (props) => {
-    const {tasks} = props;
+    const tasks = useContext(TaskContext)
+    // const {tasks} = props;
     const handleEdit = () => {
 
     }
     const lightTheme = createTheme({palette: {mode: 'light'}});
-    // const [tasks, setTasks] = React.useState(allTasks)
-    // const handleAdd = () => {
-    //     // alert()
-    //     const tasksClone = [...tasks]
-    //     tasksClone.push(props.title)
-    //     setTasks(tasksClone)
-    // }
+
     const Elevation = () => {
         if (tasks.length === 0)
             return <div style={noWorkStyle}>You have nothing to do.<br/>Go get some sleep.</div>
@@ -63,7 +60,6 @@ export const TaskList = (props) => {
                                             <Item>
                                                 <div style={subjectStyle}>
                                                     <label style={{
-                                                        // marginLeft: "-60%",
                                                         marginRight: "60%",
                                                         wordWrap: "break-word",
                                                         color: "black"
@@ -78,10 +74,10 @@ export const TaskList = (props) => {
                                                     <label style={{marginTop: "-36%"}}>Todo</label>
                                                 </div>
                                                 <div style={{marginTop: "-28%", marginLeft: "65%"}}>
-
-                                                  <Link to={`edit/${task.title}`}><BorderColorIcon /></Link>
+                                                    <Link to={`edit/${task.title}`}><BorderColorIcon/></Link>
                                                 </div>
                                             </Item>
+                                            <SelectedTask.Provider value={task}/>
                                         </div>
                                     ))}
                                 </Box>
@@ -175,13 +171,3 @@ const statusStyle = {
     borderRadius: "5px 5px 5px 5px",
 };
 
-// const scrollStyle = {
-//     overflowY: "scroll",
-// }
-
-// const paperStyle = {
-//     width: "50%",
-//     marginLeft: "-13%",
-//     height: "155px",
-//     display: "inherit"
-// }

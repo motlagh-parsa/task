@@ -1,7 +1,5 @@
 import './App.css';
 import {EditTask} from "./taskManagement/EditTask";
-import {AddTask} from "./taskManagement/AddTask";
-import {TaskList} from "./taskManagement/TaskList";
 import React, {createContext} from "react";
 import {Route, Routes} from "react-router-dom";
 import {Home} from "./Home";
@@ -32,8 +30,8 @@ function App() {
     return (
         <TaskContext.Provider value={tasks}>
             <Routes>
-                <Route index element={<Home onAdd={handleAdd}/>}/>,
-                <Route path="/edit/:id" element={<EditTask onEdit={handleEdit}/>}/>
+                <Route index element={<Home onAdd={handleAdd} onEdit={handleEdit}/>}/>
+                <Route path="/edit/:id" element={<EditTask onEdit={handleEdit} />}/>
             </Routes>
         </TaskContext.Provider>
     );

@@ -3,20 +3,25 @@ import {Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField} fro
 import EditIcon from '@mui/icons-material/Edit';
 import {useState, createContext, useContext} from "react";
 import {TaskContext} from "../App";
+import {SelectedTask} from "./TaskList";
+import {redirect, useParams} from "react-router-dom";
 
 
 export const EditTask = (props) => {
-    const task = useContext(TaskContext)
+    const {id}=useParams();
+    const tasks = useContext(TaskContext)
+    // const task = useContext(SelectedTask)
+    const task = tasks.find(t=>t.title==id);
 
-    const [title, setTitle] = React.useState(task.title)
-    const [desc, setDesc] = React.useState(task.desc)
+    const [currentTask, setCurrentTask] = React.useState(task)
+    // const [desc, setDesc] = React.useState("task.desc")
     const [status, setStatus] = React.useState(10)
 
     const titleChange = (event) => {
-        setTitle(event.target.value)
+        // setTitle(event.target.value)
     }
     const descriptionChange = (event) => {
-        setDesc(event.target.value)
+        // setDesc(event.target.value)
     }
     const statusChange = (event) => {
         setStatus(event.target.value)
@@ -45,7 +50,7 @@ export const EditTask = (props) => {
                     <TextField id="filled-basic" label="Title" variant="filled" placeholder="Title of the task"
                                size="small"
                                style={{width: "23%", paddingBottom: "1%", marginLeft: "38.5%"}}
-                               value={title}
+                               value={currentTask.title}
                                onChange={titleChange}/>
                 </div>
                 <div>
@@ -56,7 +61,7 @@ export const EditTask = (props) => {
                         placeholder="Description of task goes here."
                         variant="filled"
                         style={{width: "23%", marginLeft: "38.5%"}}
-                        value={desc}
+                        value={currentTask.desc}
                         onChange={descriptionChange}
                     />
                 </div>
@@ -77,7 +82,10 @@ export const EditTask = (props) => {
                     </FormControl>
                 </div>
                 <Stack direction="row" spacing={1.5} style={{paddingTop: "0.3%"}}>
-                    <Button onClick={props.onEdit(title, desc)} variant="contained" startIcon={<EditIcon/>} fullWidth
+                    <Button onClick={()=>{
+                        props.onEdit(currentTask);
+                        redirect('/');
+                    }} variant="contained" startIcon={<EditIcon/>} fullWidth
                             style={{marginLeft: "38.5%", height: "48px", textTransform: 'none'}}>
                         Edit
                     </Button>
